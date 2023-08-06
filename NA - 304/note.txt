@@ -1,0 +1,22 @@
+-- Class 1 note --
+
+-rwxrwxr-x 1 shahalamabir shahalamabir 16784 জুলাই     16 15:14 a.out
+-rw-rw-r-- 1 shahalamabir shahalamabir   260 জুলাই     16 14:55 class1.c
+
+
+-rw-	rw-	r--
+-user[3]group[3]others[3]
+
+r -> read
+w -> write
+- -> all
+x -> execute
+
+commands
+- chmod go-x a.out this will convert -rwxrwxr-x to -rwxrw-r--
+- chmod 700 a.out this will convert -rwxrwxr-x to -rwx------
+- chmod 764 a.out this will convert -rwxrwxr-x to -rwxrw-r--
+
+- gcc -o sinlab test01.c -lm this command will give 'sinlab' named exe. file of test01.c beside a.out
+- ./a.out | less - this will print the value of sine from the brginning // to get out of this screen we have to press 'q'
+- output file name > print file name ig : ./a.out > sin.csv == this will print all output results at sin.csv

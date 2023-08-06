@@ -1,0 +1,52 @@
+-- layer 2 - MAC address
+
+-- layer 3 - IP address
+
+-- Their is 6 layers in the internet
+
+-- How data packets are being sent
+	User -> layer 5 [user interects with this application]
+	-> layer 4 [wraps with Port Number and protocols] 
+	-> layer 3 [consider full data packet as a single data got from layer 4 and wraps with local & remote IP address] 
+	-> layer 2 [gets data packets from layer 3 and wraps local & remote MAC address] 
+	-> layer 1 [it binds data with an header and footer] 
+	-> router's layer 1 
+	-> router's layer 2 
+	-> router's layer 3
+	-> another layer 3
+	-> another layer 2
+	-> another layer 1
+	-> reciever's layer 1 [if header matches]
+	-> reciever's layer 2 
+	-> reciever's layer 3
+	-> reciever's layer 4
+	-> reciever's layer 5
+	-> reciever
+	
+	
+	
+-- There are mainly two types of ports - 1. TCP Port - data packets send for particular one user, 2. UVP Port - data packets send for everyone
+
+-- IPv4 - Decimal - first address -> 0.0.0.0, last value -> 255.255.255.255
+-- IPv6 - Hexadecimal
+
+-- IPv4 -> Network ID [first 3 byte] + Host ID [last byte]
+
+-- We have to write Net Musk [255.255.255.0] & prefix length[/24 or /anything] with the IP address. This net musk is based on the number of hosts. IF we need 256 hosts then we will use 24bit[/24] for network musk. If we need 512 hosts then we will use 23bit[/23] for network musk.
+
+-- Click here 👉️ firewall.cx 👈️ site for reading details about this networking 
+
+-- big-endian means last e higher bit
+-- little-endian means last e lower bit
+
+-- "ip a s" command to check ip address
+-- "ping -n ipAddress" this command to connect with other computer
+-- "ipcalc ownIpAddress" this command will show address, wildcard, host id, etc of own machine
+-- "sudo apt upgrade" this command will upgrade machine
+-- "ifconfig" this command will show the name of ip port and ip address
+-- "ip link show" this command also will return ip port and ip address
+-- "sudo ifconfig enp2s0:0 192.168.0.39/24" by this command we will set our ip address for the ip port
+-- "which applicationName" by this command if this application exist then we will get a path or this will return nothing. By this we can ensure weather this application exists or not in the macine.
+-- "sudo tcpdump -i enp2s0 -n -vvv -w test.pcap" by this command we can write the request and responses in a .ecap file
+-- "hexdump arp.pcap" this will convert and show data of arp.pcap in teminal in hexcode format
+

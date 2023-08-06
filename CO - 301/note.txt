@@ -1,0 +1,7 @@
+We use dynamic programming when any logical part of program is repeated more than once.
+
+We don't use dynamic programming in "Divide & Conqure" because there is no logical part in this algorithm that is repeated
+
+Recursive -> top down approach
+
+Iterative -> bottom up approach
