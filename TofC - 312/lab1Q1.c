@@ -36,7 +36,7 @@ void concat(char str1[], char str2[]){
     }
     
     for(int i=0; i<l2; i++){
-    	str3[i+l1] = str1[i];
+    	str3[i+l1] = str2[i];
     }
     
     str3[l1+l2] = '\0';
@@ -81,16 +81,15 @@ int main(){
     //concatenating two string
     char str3[100], str4[100];
     
-    /*printf("First String - ");
-    scanf("%s", str3);
+    printf("First String - ");
+    scanf("%s", &str3);
     printf("\n");
     
     printf("First String - ");
-    scanf("%s", str3);
-    printf("\n");*/
-    
-    concat("111100","111000");
-    //concat(str3, str4);
+    scanf("%s", &str4);
+    printf("\n");
+
+    concat(str3, str4);
     
     return 0;
 }

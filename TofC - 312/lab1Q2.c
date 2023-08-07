@@ -9,17 +9,6 @@ int len(char* str){
     return i;
 }
 
-/*int d2b(int num){
-	int i=0;
-	while(num!=0){
-		int k = num%2;
-		i = i*10 + k;
-		num = num/2;
-	}
-	
-	return i;
-}*/
-
 int isPal(char str[]){
 	int a = len(str);
 	int i=0, j=a;
@@ -34,17 +23,24 @@ int isPal(char str[]){
 	return 1;
 }
 
-/*void lastOne(int k){
-	int a = pow(2, k);
-	for(int i=0; i<a; i++){
-		num[i] = d2b(i);
-	}
-}*/
+void printStr(char str[], int leng, int k, char *str2, int strLen){
+    if(strLen == k){
+        printf("%s  \n", str2);
+        return;
+    }
+
+    for(int i=0; i<leng; i++){
+        str2[strLen] = str[i];
+        str2[strLen+1] = '\0';
+        printStr(str, leng, k, str2, strLen+1); 
+    }
+
+    return;
+}
 
 int main(){
 
-	char str[] = {'0','1'};
-	
+	char str[] = "01";
 	
 	//palindrom
 	
@@ -60,22 +56,13 @@ int main(){
     }else {
     	printf("False\n\n");
     }
-    
-    //enter k value
-    /*int k;
-    
-    printf("Enter the value of K - ");
+
+    //printing permutation of all
+    int k;
+    printf("Enter K : ");
     scanf("%d", &k);
-    
-    lastOne(k);
-    
-    for(int i=0; i<pow(2, k); i++){
-    
-    	printf("%d\n", num[i]);
-    }*/
+    char str3[k+1];
+    printStr(str, len(str), k, str3, 0);
 	
 	return 0;
 }
-
-
-

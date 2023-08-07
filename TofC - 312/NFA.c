@@ -1,80 +1,75 @@
-#include <stdio.h>
-#include <string.h>
+// NFA that shows only one path and "Accepted" or "Rejected" messege
+
+
+#include<stdio.h>
+
+int a, b, startState, endState;
+
+int nfaTraversal(int trans[a][b][a], int state, char *input, int pos){
+    if(input[pos]=='\0'){
+        if(state == endState){
+            printf("%d ", state);
+            printf("\nAccepted.\n");
+            return 0;
+        }else {
+            printf("%d ", state);
+            printf("\nRejected.\n");
+            return 0;
+        }
+    }
+
+    printf("%d ", state);
+    int value = input[pos] - '0';
+    for(int i=0; i<a; i++){
+        if(trans[state][value][i] != -1){
+            // printf("%d ", state);
+            return nfaTraversal(trans, trans[state][value][i], input, pos+1);
+        }
+    }
+
+    return 0;
+}
 
 int main(){
-    int n, m, i, j, k, p, o;
 
-    printf("Enter Number of states: ");
-    scanf("%d", &n);
+    //taking general infos
     
-    o = n;
+    printf("Enter the number of states : ");
+    scanf("%d", &a);
+    printf("Enter the number of symbols : ");
+    scanf("%d", &b);
 
-    int states[n];
+    char smbl[b];
+    printf("Enter the symbols : ");
+    scanf("%s", &smbl);
 
-    printf("Enter Number of symbols: ");
-    scanf("%d", &m);
+    //taking transition function from file
+    int trans[a][b][a];
 
-    char symbols[m];
-
-    printf("Enter the symbols:");
-    scanf("%s", &symbols);
-
-    int transitionFunction[n][m][o];
-
-    printf("Enter the transition function: \n");
-    for(i=0; i<n; i++){
-        for(j=0; j<m; j++){
-            printf("%d x %c = ", i, symbols[j]);
-            scanf("%d", &transitionFunction[i][j]);
-        }
-    }
-
-    int startState, nOfe;
-    printf("Enter starting state: \n");
-    scanf("%d", &startState);
-
-    printf("How many ending points are there?\n");
-    scanf("%d", &nOfe);
-    int endState[nOfe];
-    for(p=0; p<nOfe; p++){
-        printf("Enter %d-th ending state: \n", p+1);
-        scanf("%d", &endState[p]);
-    }
-
-    char string[100];
-
-    int l;
-    for(l=0; ;l++){
-        printf("Enter the string: ");
-        scanf("%s", string);
-
-        int currentState = startState;
-        char* ptr = &string;
-
-        printf("Path is : ");
-
-        while (*ptr != '\0') {
-            currentState = transitionFunction[currentState][*ptr - 48];
-            printf("%d ", currentState);
-            ptr++;
-        }
-
-        printf("\n");
-
-        int flag = 0;
-
-        for(i=0; i<nOfe; i++){
-            if(currentState==endState[i]){
-                flag=1;
+    FILE *fp = fopen("nfa.txt", "r");
+    for(int i=0; i<a; i++){
+        for(int j=0; j<b; j++){
+            for(int k=0; k<a; k++){
+                fscanf(fp, "%d", &trans[i][j][k]);
             }
         }
+    }
+    
+    // int startState, endState;
+    printf("Enter Starting State: ");
+    scanf("%d", &startState);
+    printf("Enter Ending State: ");
+    scanf("%d", &endState);
 
-        if(flag==1){
-            printf("Accepted!!\n\n");
-        }else{
-            printf("Rejected!!\n\n");
-        }
+    //Taking input of the STRING to be checked
+    char str[100];
 
+    while(1){
+            
+        printf("Enter the String to check : ");
+        scanf("%s", &str);
+
+        nfaTraversal(trans, 0, str, 0);
     }
 
     return 0;
