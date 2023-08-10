@@ -16,6 +16,7 @@ int nfaTraversal(int trans[a][b][a], int state, char *input, int pos, char *ans)
             for(int i=0; i<=pos+1; i++){
                 printf("%c ", ans[i]);
             }
+            printf("\n");
             flag = 1;
             return 0;
         }else {
@@ -77,9 +78,9 @@ int main(){
 
         nfaTraversal(trans, 0, str, 0, ans);
         if(flag==0){
-            printf("\nRejected\n");  
+            printf("\nRejected\n\n");  
         }else{
-            printf("\nAccepted\n");  
+            printf("\nAccepted\n\n");  
         }
     }
     
