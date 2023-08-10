@@ -41,7 +41,7 @@ int main(){
 
     char smbl[b];
     printf("Enter the symbols : ");
-    scanf("%s", &smbl);
+    scanf("%s", smbl);
 
     //taking transition function from file
     int trans[a][b][a];
@@ -67,7 +67,7 @@ int main(){
     while(1){
             
         printf("Enter the String to check : ");
-        scanf("%s", &str);
+        scanf("%s", str);
 
         nfaTraversal(trans, 0, str, 0);
     }

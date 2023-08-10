@@ -1,0 +1,33 @@
+- mii-tool & eth-tool is being used to see information of layer 1 network (info about hardware tools & underlying technologies)
+
+- arpa table stores [MAC address] & IMEI number [for phone] this is layer 2 of a network
+
+- ip address is a component of layer 3 of a network
+
+- kono machine ke ping korle oi machine er ip arpa table e set hoye thake
+
+- commands 
+	1. sudo mii-tool enp2s0
+	2. sudo ethtool enp2s0
+	3. arp [to see arpa table by name of network]
+	4. arp -n [to see arpa table by ip address]
+	5. !c - this will execute latest command developer executed that starts with c
+	6. ip r - shows routing table as like arpa table
+	7. route - works same as ip r
+	8. sudo route del default - to set gateway ip 0.0.0.0, in that case we can't access internet
+	9. sudo route add -net default gw 10.100.114.1 - this command sets the gateway ip as 10.100.114.1, now we will able to communicate through internet.ip
+	10. sudo ifconfig lo:111 192.168.100.139 netmusk 255.255.255.0 - this is to add another loopback ip [this is only for the own device or we can only communicate ib own machine. This doesn't allow to communicate outside of the device]
+	11. sudo ifconfig lo:111 192.168.100.139/24 - same as previous
+	12. ifconfig - to see the ip addresses and gateways
+	13. sudo route add -host 192.168.100.128 gw 10.100.115.252 - add this host in that gateway
+	14. sudo ifconfig lo:111 down - to cutoff lo:111
+	15. sudo route del 192.168.100.128 - to delete ip from route table
+	16. sudo route add -net 192.168.128.0/24 gw 10.100.115.252 - add this network by this gateway [receiver's default ip]
+	17. sudo route del -net 192.168.128.0/24 gw 10.100.115.252 - del this network from this gateway [receiver's default ip]. In that case we can't communicate with receiver anymore.
+	18. lsof -i -n - shows list of open files over network
+	19.lsof -i -n -P - shows list of open files with port number over network
+	20. nc 127.0.0.1 -l 8080 - numerical class with a ip address to connect and port number to communicate with [this is a host]
+	21. nc 127.0.0.1 8080 - numerical class with a ip address to connect and port number to communicate with [this is a client]
+
+
+
