@@ -11,8 +11,7 @@ double func(double a){
 }
 
 //code for simpson
-int simpSon(double a, double b){
-	int n = 10000;
+int simpSon(int n, double a, double b){
 	double h, x[n+1], y[n+1], sum_x, sum_o = 0, sum_e = 0;
 	x[0] = a;
 	x[n] = b;
@@ -35,10 +34,12 @@ int simpSon(double a, double b){
 	}
 	
 	double i = (h/3)*(sum_x + (4*sum_o) + (2*sum_e));
+	double j = (h/2)*(sum_x + (2*sum_o) + (2*sum_e));
 	
-	printf("Simpson Rule\n");
+	printf("Simpson Rule Integral Value: %lf\n", i);
 	printf("-----------------\n");
-	printf("Integral Value: %lf\n", i);
+
+	printf("Trapezoid Rule Integral Value: %lf\n", j);
 	printf("-----------------\n");
 	
 	return 0;
@@ -67,7 +68,7 @@ int main(void){
 	
 	root = bisection(100, 0.25, 1.25);
 	
-	simpSon(0.0, root);
+	simpSon(10, 0.0, root);
 	
 	return 0;
 }
