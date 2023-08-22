@@ -5,9 +5,7 @@ using namespace std;
 
 int a, b;
 int m = 0, n;
-string smbl, sState, eState;
-string transitionDFA[20][2];
-string states[20];
+string smbl;
 
 //checking if the state is declared as state before or not
 bool checkValid(string states[], string state){
@@ -20,9 +18,9 @@ bool checkValid(string states[], string state){
 }
 
 // removing duplicate values from the string that made inside addNewState() function
-string removeduplicate(string str, int f){
+string removeduplicate(string str, int n){
    int index=0;
-   for (int i=0;i<f;i++){
+   for (int i=0;i<n;i++){
         int j;
         for(j=0;j<i;j++){
             if(str[i]==str[j]){
@@ -36,31 +34,18 @@ string removeduplicate(string str, int f){
    return str.substr(0, index);
 }
 
-//find state 
-int findState(char h){
-    string temp;
-    temp += h;
-	for(int i=0; i<n; i++){
-		if(states[i].compare(temp)){
-			return i+1;
-		}
-	}
-	return -1;
-}
-
 //adding new state to the dfa that not been included before
-string addNewState(string state, int i){
+string addNewState(string transitionDFA[][2], string state, int i){
 
     string indxToAdd;
-    for(int k=0; k<b; k++){
-	    for(int j=0; j<state.size(); j++){
-    		int indx = findState(state[j]);
-    		indxToAdd = indxToAdd + (transitionDFA[indx][k]);
-    	}
+    for(int j=0; j<state.size(); j++){
+        indxToAdd = indxToAdd.append(transitionDFA[j][i]);
     }
     indxToAdd = removeduplicate(indxToAdd, indxToAdd.size());
+    
     return indxToAdd;
 }
+
 
 int main(){  
 
@@ -72,14 +57,10 @@ int main(){
     cin >> b;
     cout << "Enter the symbols of NFA : " << endl;
     cin >> smbl;
-    cout << "Enter the starting state of NFA : " << endl;
-    cin >> sState;
-    cout << "Enter the ending state of NFA : " << endl;
-    cin >> eState;
 
     string transitionNFA[a][b];
-    //string transitionDFA[20][2];
-    //string states[20];
+    string transitionDFA[20][2];
+    string states[20];
 
     //reading transition table of NFA from File
     fstream file;
@@ -101,22 +82,15 @@ int main(){
             if(!checkValid(states, transitionDFA[i][j])){
                 for(int k=0; k<b; k++){
                     states[n] = transitionDFA[i][j];
-                    transitionDFA[n][k] = addNewState(transitionDFA[i][j], k);
+                    transitionDFA[n][k] = addNewState(transitionDFA, transitionDFA[i][j], k);
                 }
                 n++;
             }
         }
     }
-    
-    //printing states of the dfa
-    cout << "\nStates of the DFA is - ";
-    for(int i=0; i<n; i++){
-    	cout << states[i] << " ";
-    }
-    cout << "\n";
 
     //Printing DFA
-    cout << "\nDFA's transition function table is -\n\n";
+    cout << "\nDFA's transition function is -\n\n";
     for(int i=0; i<n; i++){
         cout << states[i] << "\t";
         for(int j=0; j<b; j++){
@@ -124,18 +98,6 @@ int main(){
         }
         cout << endl;
     }
-    
-    //printing starting state and ending state
-    cout << "\nStarting state of DFA is - " << sState << "\n";
-    
-    cout << "\nAcceptance state of DFA is - ";
-    for(int i=0; i<n; i++){
-    	if(states[i].find(eState) != -1){
-    		cout << states[i] << " ";
-    	}
-    }
-    cout << "\n";
-    
-    
+
     return 0;
 }
