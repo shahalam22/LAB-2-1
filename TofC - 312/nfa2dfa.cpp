@@ -64,7 +64,7 @@ int main(){
 
     //reading transition table of NFA from File
     fstream file;
-    file.open("1439.txt", ios::in);
+    file.open("nfa2dfa.txt", ios::in);
     if(file.is_open()){
         for(int i=0; i<a; i++){
             for(int j=0; j<b; j++){
