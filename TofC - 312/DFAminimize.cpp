@@ -133,7 +133,7 @@ int main(){
         }
     }
 
-    cout << "\nEquibalent states: " << endl;
+    cout << "\nEquivalent states: " << endl;
 
     for(int i=0; i<numOfStates; i++){
         for(int j=0; j<i; j++){
