@@ -7,7 +7,6 @@ vector<int> weights;
 set<char> nodes;
 set<char> mst;
 
-
 struct node{
     char p;
     int rank;
@@ -99,6 +98,8 @@ int main(){
     copy(weights.begin(), weights.end(), sortedWeights);
     sort(sortedWeights, sortedWeights+weights.size());
 
+    int sum = 0;
+
     //kuskal main loop
     for(int j=0; j<weights.size(); j++){
         int index = findIndex(sortedWeights[j]);
@@ -110,7 +111,11 @@ int main(){
             edge += startNode;
             edge += "-";
             edge += endNode;
+            edge += " ";
+            edge += to_string(sortedWeights[j]);
             mstEdges.push_back(edge);
+
+            sum += sortedWeights[j];
         }
     }
 
@@ -119,6 +124,7 @@ int main(){
     for(int j=0; j<mstEdges.size(); j++){
         cout << mstEdges[j] << "\n";
     }
+    cout << "Total weight of MST is : " << sum << "\n";
 
     return 0;
 }
