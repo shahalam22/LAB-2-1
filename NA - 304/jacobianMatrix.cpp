@@ -58,42 +58,42 @@ int main(){
     }
 
 
-// jacobi method
+// // jacobi method
 
     int i = 1;
-    cout << "IT No.\tx1\tx2\tx3" << endl;
-    while(!converge(xO, xN)){
-        //printing iterations
-        cout << i << "\t";
-        for(int i=0; i<3; i++){
-            cout << xN[i] << "\t";
-        }
-        cout << endl;
+//     cout << "IT No.\tx1\tx2\tx3" << endl;
+//     while(!converge(xO, xN)){
+//         //printing iterations
+//         cout << i << "\t";
+//         for(int i=0; i<3; i++){
+//             cout << xN[i] << "\t";
+//         }
+//         cout << endl;
 
-        for(int i=0; i<3; i++){
-            xO[i] = xN[i];
-        }
-        for(int i=0; i<3; i++){
-            double temp = 0;
-            for(int j=0; j<3; j++){
-                if(i!=j){
-                    temp += matx[i][j]*xO[j];
-                }
-            }
-            xN[i] = (b[i]-temp)/matx[i][i];
-        }
-        i++;
-    }
+//         for(int i=0; i<3; i++){
+//             xO[i] = xN[i];
+//         }
+//         for(int i=0; i<3; i++){
+//             double temp = 0;
+//             for(int j=0; j<3; j++){
+//                 if(i!=j){
+//                     temp += matx[i][j]*xO[j];
+//                 }
+//             }
+//             xN[i] = (b[i]-temp)/matx[i][i];
+//         }
+//         i++;
+//     }
 
-    cout << "\t\t\t" << endl;
+//     cout << "\t\t\t" << endl;
+
+
+// jaccobi method matrix formation
 
     for(int i=0; i<3; i++){
         xO[i] = -1;
         xN[i] = 0;
     }
-
-
-// gauss-seidel method
 
     i = 1;
     cout << "IT No.\tx1\tx2\tx3" << endl;
@@ -109,19 +109,55 @@ int main(){
         for(int i=0; i<3; i++){
             xO[i] = xN[i];
         }
-        
+
         for(int i=0; i<3; i++){
             double temp = 0;
             for(int j=0; j<3; j++){
-                if(i!=j){
-                    temp += matx[i][j]*xN[j];
-                }
+                temp += matx[i][j]*xO[j];
             }
-            xN[i] = (b[i]-temp)/matx[i][i];
+            xN[i] = xO[i] + matAi[i]*(b[i]-temp);
         }
 
         i++;
     }
+
+    cout << "\t\t\t" << endl;
+
+
+// // gauss-seidel method
+
+//     for(int i=0; i<3; i++){
+//         xO[i] = -1;
+//         xN[i] = 0;
+//     }
+
+//     i = 1;
+//     cout << "IT No.\tx1\tx2\tx3" << endl;
+
+//     while(!converge(xO, xN)){
+//         //printing iterations
+//         cout << i << "\t";
+//         for(int i=0; i<3; i++){
+//             cout << xN[i] << "\t";
+//         }
+//         cout << endl;
+
+//         for(int i=0; i<3; i++){
+//             xO[i] = xN[i];
+//         }
+        
+//         for(int i=0; i<3; i++){
+//             double temp = 0;
+//             for(int j=0; j<3; j++){
+//                 if(i!=j){
+//                     temp += matx[i][j]*xN[j];
+//                 }
+//             }
+//             xN[i] = (b[i]-temp)/matx[i][i];
+//         }
+
+//         i++;
+//     }
 
     cout << "\t\t\t" << endl;
 
