@@ -54,13 +54,22 @@ bool hasValue(vector<int> a, int value){
 
 int main(){
 
-    int graph[6][6] = {
-        {0,2,3,0,0,0},
-        {0,0,0,3,1,0},
-        {0,0,0,1,1,0},
-        {0,0,0,0,0,2},
-        {0,0,0,0,0,3},
-        {0,0,0,0,0,0}
+//example 1
+    // int graph[6][6] = {
+    //     {0,2,3,0,0,0},
+    //     {0,0,0,3,1,0},
+    //     {0,0,0,1,1,0},
+    //     {0,0,0,0,0,2},
+    //     {0,0,0,0,0,3},
+    //     {0,0,0,0,0,0}
+    // };
+
+//example 2
+    int graph[4][4] = {
+        {0,6,2,0},
+        {0,0,4,4},
+        {0,0,0,8},
+        {0,0,0,0}
     };
 
     int max_flow = 0, source, destination, n;
@@ -68,7 +77,36 @@ int main(){
     // //taking input
     // cout << "Enter number of vertices: ";
     // cin >> n;
-    n = 6;
+    // n = 6;
+    n = 4;
+
+    //adding supply and demand
+    // int supply[n], demand[n];
+
+    // cout << "Enter supply:";
+    // for(int i=0; i<n; i++){
+    //     cin >> supply[i];
+    // }
+    // int supply[6] = {3,3,0,1,0,0};
+    int supply[4] = {4,5,0,0};
+    
+    // cout << "Enter demand:";
+    // for(int i=0; i<n; i++){
+    //     cin >> demand[i];
+    // }
+    // int demand[6] = {0,0,1,0,1,5};
+    int demand[4] = {0,0,2,7};
+
+    //calculating total supply. Here we will count this as total supply = total demand 
+    int totalSupply = 0;
+    for(int i=0; i<n; i++){
+        totalSupply += supply[i];
+    }
+
+    // updating source, destination, n
+    source = n;
+    destination = n+1;
+    n = n+2;
 
     //renovationg graph to graphOri
     for(int i=0; i<n; i++){
@@ -77,27 +115,25 @@ int main(){
         }
     }
 
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            if(graph[i][j] > 0){
-                graphOri[i][j] = graph[i][j];
-                graphOri[j][i] = graph[i][j];
-            }
+    for(int i=0; i<n-2; i++){
+        for(int j=0; j<n-2; j++){
+            graphOri[i][j] = graph[i][j];
         }
+    }
+
+    for(int i=0; i<n-2; i++){
+        graphOri[source][i] = supply[i];
+        graphOri[i][destination] = demand[i];
     }
     
 
-    // updating source, destination, n
-    source = 0;
-    destination = n-1;
-
-// //printing graphOri
-//     for(int i=0; i<n; i++){
-//         for(int j=0; j<n; j++){
-//             cout << graphOri[i][j] << " ";
-//         }
-//         cout << endl;
-//     }
+//printing graphOri
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            cout << graphOri[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     while(bfs(source, destination, n).size() > 0){
         int min_flow = INT_MAX;
@@ -117,5 +153,11 @@ int main(){
     }
 
     cout << "Max flow: " << max_flow << endl;
+    if(max_flow == totalSupply){
+        cout << "Feasible solution" << endl;
+    }
+    else{
+        cout << "Infeasible solution" << endl;
+    }
 
 }
